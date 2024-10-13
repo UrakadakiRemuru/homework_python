@@ -47,7 +47,3 @@ def recover_article() -> str:
         sentence += result_raw
 
     return sentence
-
-print(get_correct_article())
-print(recover_article())
-assert get_correct_article() == recover_article()
