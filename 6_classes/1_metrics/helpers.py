@@ -45,8 +45,8 @@ class CSVReader:
         with open(filepath, "r") as file:
             reader = csv.reader(file, delimiter=";")
             for idx, row in enumerate(reader):
-                if idx == 0:
-                    continue
+                # if idx == 0:
+                #     continue
 
                 metrics.append(Metric(*row))
 
