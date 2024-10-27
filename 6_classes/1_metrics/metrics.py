@@ -1,3 +1,4 @@
+import os.path
 from datetime import datetime, UTC
 
 
@@ -47,6 +48,19 @@ class DelegateTXT:
 
 
 class DelegateCSV(DelegateTXT):
+
+    def create_file(self):
+        mode = 'a'
+        line = 'date;metric;value\n'
+        if os.path.exists(self.path):
+            with open(self.path, 'r') as file:
+                if not file.readlines():
+                    mode = 'w'
+                else:
+                    line = ''
+        with open(self.path, mode) as f:
+            f.write(line)
+
     def write_to_file(self, sep=';'):
         super().write_to_file(sep)
 
@@ -66,8 +80,7 @@ class Statsd:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if exc_type:
-            self.delegate.evacuate()
+        self.delegate.evacuate()
 
 
 def get_txt_statsd(path: str, buffer_limit: int = 10) -> Statsd:
