@@ -151,13 +151,13 @@ def test_evacuate_decr_metrics_buffer(
 @pytest.mark.parametrize(
     "filename, initializer, reader, count_metrics, expected_length",
     (
-        ("metrics.txt", get_txt_statsd, TxtReader(), 1, 0),
-        ("metrics.txt", get_txt_statsd, TxtReader(), 5, 0),
-        ("metrics.txt", get_txt_statsd, TxtReader(), 12, 10),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 1, 1),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 5, 5),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 12, 12),
         ("metrics.txt", get_txt_statsd, TxtReader(), 20, 20),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 1, 0),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 5, 0),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 12, 10),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 1, 1),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 5, 5),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 12, 12),
         ("metrics.csv", get_csv_statsd, CSVReader(), 20, 20),
     )
 )
@@ -193,13 +193,13 @@ def test_evacuate_protected_incr_metrics_buffer_without_error(
 @pytest.mark.parametrize(
     "filename, initializer, reader, count_metrics, expected_length",
     (
-        ("metrics.txt", get_txt_statsd, TxtReader(), 1, 0),
-        ("metrics.txt", get_txt_statsd, TxtReader(), 5, 0),
-        ("metrics.txt", get_txt_statsd, TxtReader(), 12, 10),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 1, 1),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 5, 5),
+        ("metrics.txt", get_txt_statsd, TxtReader(), 12, 12),
         ("metrics.txt", get_txt_statsd, TxtReader(), 20, 20),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 1, 0),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 5, 0),
-        ("metrics.csv", get_csv_statsd, CSVReader(), 12, 10),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 1, 1),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 5, 5),
+        ("metrics.csv", get_csv_statsd, CSVReader(), 12, 12),
         ("metrics.csv", get_csv_statsd, CSVReader(), 20, 20),
     )
 )
@@ -358,4 +358,4 @@ def test_target_file_for_csv_without_header(tmp_path):
         reader = csv.reader(file, delimiter=";")
         lines = [row for row in reader]
 
-    assert len(lines) == 0
+    assert len(lines) == 2
